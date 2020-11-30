@@ -11,14 +11,17 @@
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.20"
+  },
   "devDependencies": {
+    "chai": "^4.2.0",
     "commitizen": "^4.2.2",
     "husky": "^4.3.0",
     "mocha": "^8.2.1"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha  --watch"
   },
   "keywords": [
     "ML",
