@@ -3,12 +3,18 @@
 		this._ = require("lodash");
 	}
 
+	function browserlog(message, obj) {
+		if (globalThis.location) {
+			console.log(message, obj);
+		}
+	}
+
 	const outputs = [];
 	function onScoreUpdate(dropPosition, bounciness, size, bucketLabel) {
 		// Ran every time a balls drops into a bucket
 		const score = [dropPosition, bounciness, size, bucketLabel];
 		outputs.push(score);
-		console.log(outputs);
+		browserlog(outputs);
 	}
 
 	const runAnalysis = (data) => {
@@ -36,22 +42,22 @@
 				row[BUCKET_LABEL],
 			])
 			.tap((a) =>
-				console.log(`STEPS 1+2: Get absolute distance from Base (${BASE}) `, a)
+				browserlog(`STEPS 1+2: Get absolute distance from Base (${BASE}) `, a)
 			)
 			.sortBy(BASE_DIST)
-			.tap((a) => console.log(`STEP3: Sort by distance from ${BASE}`, a))
+			.tap((a) => browserlog(`STEP3: Sort by distance from ${BASE}`, a))
 			.value();
 
-		console.log(
+		browserlog(
 			`STEP4: Take top _K (${_K}) results (to see which result is most common for 'close to' ${BASE})`
 		);
 
 		const step4 = results.slice(0, _K);
 		step4.map((a) => {
-			console.log(a);
+			browserlog(a);
 		});
 
-		console.log(
+		browserlog(
 			`STEP5: See which result is most common in Top _K(${_K}) Results (based on closeness to ${BASE})`
 		);
 		this.bucketCountsMap = new Map();
@@ -63,7 +69,7 @@
 		});
 
 		for (let [key, value] of bucketCountsMap) {
-			console.log("bucket: " + key + " has " + value.count + "results");
+			browserlog("bucket: " + key + " has " + value.count + "results");
 		}
 
 		let winnerBucket;
@@ -76,7 +82,7 @@
 				winnerBucket = bucket;
 			}
 		});
-		console.log("WINNER BUCKET =", winnerBucket);
+		browserlog("WINNER BUCKET =", winnerBucket);
 
 		return winnerBucket;
 	};

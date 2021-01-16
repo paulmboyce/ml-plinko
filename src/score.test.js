@@ -1,4 +1,4 @@
-var score = require("../src/score");
+var score = require("./score");
 var expect = require("chai").expect;
 
 describe("Array", function () {
@@ -18,9 +18,9 @@ describe("Array", function () {
 				[650, 0.5, 16, 4],
 				[300, 0.5, 16, 5],
 			];
-			console.log("AN", score.runAnalysis);
+			//			console.log("AN", score.runAnalysis);
 			const result = score.runAnalysis(DATA);
-			console.log(result);
+			//			console.log(result);
 			expect(result).to.equal(5);
 		});
 	});

@@ -1,11 +1,14 @@
 {
-  "diff": true,
-  "extension": ["js"],
-  "package": "./package.json",
-  "reporter": "spec",
-  "slow": 75,
-  "timeout": 2000,
-  "ui": "bdd",
-  "watch-files": ["src/**/*.js", "test/**/*.js"],
-  "watch-ignore": ["lib/vendor"]
+	"diff": true,
+	"extension": ["js"],
+	"package": "./package.json",
+	"reporter": "spec",
+	"slow": 75,
+	"timeout": 2000,
+	"ui": "bdd",
+	// By default mocha looks in "test" dir,
+	// Use "spec" to configure alternate folder:
+	"spec": "src/**/*.test.js",
+	"watch-files": ["src/**/*.js", "test/**/*.js"],
+	"watch-ignore": ["lib/vendor"]
 }
