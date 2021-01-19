@@ -3,9 +3,15 @@
 		this._ = require("lodash");
 	}
 
+	let _DEBUG = false;
+
 	function browserlog(message, obj) {
-		if (globalThis.location) {
-			console.log(message, obj);
+		if (globalThis.location || _DEBUG) {
+			if (obj) {
+				console.log(message, obj);
+			} else {
+				console.log(message);
+			}
 		}
 	}
 
@@ -17,7 +23,7 @@
 		browserlog(outputs);
 	}
 
-	const runAnalysis = (data) => {
+	const runAnalysis = (data, _K = 5, debug = false) => {
 		// Write code here to analyze stuff
 
 		// 1. Subtract 300 from all dropPosition values
@@ -26,10 +32,20 @@
 		// 4. Take top "k" results
 		// 5. See which result is most common.
 		const BASE = 300;
-		const _K = 3;
 		const DROP_POSN = 0;
 		const BASE_DIST = 0;
 		const BUCKET_LABEL = 3;
+
+		_DEBUG = debug;
+
+		if (globalThis.location || _DEBUG) {
+			console.log(
+				"\n\n\n\nTop K results, _K: %s, BASE: %s DEBUG: %s \n ========================== \n\n\n",
+				_K,
+				BASE,
+				_DEBUG
+			);
+		}
 
 		const absDistance = (position) => {
 			return Math.abs(position - BASE);
@@ -83,7 +99,6 @@
 			}
 		});
 		browserlog("WINNER BUCKET =", winnerBucket);
-
 		return winnerBucket;
 	};
 
